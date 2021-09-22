@@ -139,6 +139,22 @@ Save this file and reboot.
 ```
 sudo reboot
 ```
+To find out what URL your pi is running type the command
+```
+hostname -I
+```
+Should look something like this:
+```
+pi@raspberrypi:~ $ hostname -I
+10.0.0.199 2601:805:4200:b610::dfb0 2601:805:4200:b610:69a2:d5c:c085:1808
+```
+
+The default port for flask is 5000 so in my case the URL for the live temp readout is;
+10.0.0.199:5000
+(Note: this is only accessable on your local network.)
+
+![image](https://user-images.githubusercontent.com/36175788/134394819-aa2bf560-25be-47ba-88f7-58dbb43a28ec.png)
+
 
 ### Now your Raspberry Pi is set up! Time to brew! 
 
