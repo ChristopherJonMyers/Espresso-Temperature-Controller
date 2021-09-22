@@ -2,6 +2,8 @@
 Add temperature control functionality to the Rancilio Silvia and live temperature readout via Flask web app.
 _(sowftware should work for other machines, but hardware setup might be different.)_
 
+![image](https://user-images.githubusercontent.com/36175788/134394088-dbea1d38-03b6-492e-822c-ecdd7ad84595.png)
+
 ## What You Will Need
 
 ### Hardware 
