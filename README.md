@@ -1,5 +1,5 @@
-# EspressoPID
-Add temperature control functionality to the Rancilio Silvia. 
+# Espresso Temperature Controler
+Add temperature control functionality to the Rancilio Silvia and live temperature readout via Flask web app.
 _(sowftware should work for other machines, but hardware setup might be different.)_
 
 ## What You Will Need
@@ -66,22 +66,79 @@ Next we need to attach our thermocouple to the boiler body. I have done this by 
 
 Using this image as a refference I did the following: 
 * SSR 
- * SSR Positive (white) to GPIO 7
- * SSr Negative (black) to Ground directly across from GPIO 7
+  * SSR Positive (white) to GPIO 7
+  * SSr Negative (black) to Ground directly across from GPIO 7
 * MAX31856 sensor
- * Pi 3V to sensor VIN
- * Pi GND to sensor GND
- * Pi SCK (SPI 0) to sensor SCK
- * Pi MISO (SPI 0) to sensor SDO
- * Pi MOSI (SPI 0) to sensor SDI
- * Pi GPIO 5 to sensor CS (or any other free digital I/O pin)
+  * Pi 3V to sensor VIN
+  * Pi GND to sensor GND
+  * Pi SCK (SPI 0) to sensor SCK
+  * Pi MISO (SPI 0) to sensor SDO
+  * Pi MOSI (SPI 0) to sensor SDI
+  * Pi GPIO 5 to sensor CS (or any other free digital I/O pin)
 
 ![image](https://user-images.githubusercontent.com/36175788/134382274-c73abe2b-6a66-4213-8021-6028e3000ce0.png)
 
 ### Now your Silvia harware is set up!!!
 
 
+## Software Instalation
 
+First clone this repository to your project directory. 
+```
+sudo git clone https://github.com/ChristopherJonMyers/Espresso-Temperature-Controler.git
+```
+
+You are going to need to install the prerequisits for the Adafruit Universal Thermocouple Amplifier MAX31856.
+
+[Install CircuitPython onto your machine](https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/installing-circuitpython-on-raspberry-pi)
+
+Update to python3
+```
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install python3-pip
+sudo pip3 install --upgrade setuptools
+```
+
+Install CircuitPython 
+```
+sudo pip3 install --upgrade adafruit-python-shell
+wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py
+sudo python3 raspi-blinka.py
+```
+
+Install CircuitPython drivers for [adafruit max31856 thermocouple amplifier](https://learn.adafruit.com/adafruit-max31856-thermocouple-amplifier/python-circuitpython)
+```
+sudo pip3 install adafruit-circuitpython-max31856
+```
+
+[Install and set up Flask](https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3)
+```
+pip install flask
+export FLASK_APP=app
+export FLASK_ENV=development
+```
+
+Set up Flask and Brewtemp Controller to run on Boot of Raspberrt Pi.
+
+This is done by adding the scripts into the rc.local in the etc folder. 
+Start by opening a new terminal and put in these comands to open the file
+
+```
+sudo su
+cd ../../etc/
+nano rc.local
+```
+Now you need to add the scripts BrewTempControler.py and app.py as shown below. 
+(you will need to provide the correct path to where you cloned this repository) 
+![image](https://user-images.githubusercontent.com/36175788/134390644-02e19c27-206d-462b-bddd-e1ee54ca68b3.png)
+
+Save this file and reboot.
+```
+sudo reboot
+```
+
+### Now your Raspberry Pi is set up! Time to brew! 
 
 
 
