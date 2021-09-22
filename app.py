@@ -9,8 +9,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     curTemp = Tcup()
-    brewTemp = 94
-    return render_template('index.html', curTemp=curTemp, brewTemp=brewTemp)
+    return render_template('index.html', curTemp=curTemp)
 
 def Tcup():
     spi = board.SPI()
